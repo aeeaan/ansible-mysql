@@ -1,0 +1,28 @@
+---
+galaxy_info:
+  author: Joshua Rusch
+  description: 
+  company:
+  license: MIT
+  min_ansible_version: 1.2
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  #categories:
+  #- cloud
+  #- cloud:ec2
+  #- cloud:gce
+  #- cloud:rax
+  #- clustering
+  #- database
+  #- database:nosql
+  #- database:sql
+  #- development
+  #- monitoring
+  #- networking
+  #- packaging
+  #- system
+  #- web
+dependencies: []
