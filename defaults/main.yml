@@ -1,2 +1,5 @@
 ---
-# defaults file for mysql
+# valid flavors: percona, mysql-community, mariadb
+# anything else will install standard RHEL RPMs
+mysql_flavor: ''
+mysql_version: 

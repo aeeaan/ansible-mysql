@@ -1,0 +1,63 @@
+---
+- name: install percona key
+  rpm_key: key=http://www.percona.com/downloads/RPM-GPG-KEY-percona state=present
+  when: mysql_flavor=='percona'
+  tags:
+    - repos
+    - packages
+
+- name: template percona config
+  template: src=percona-release.repo.j2 dest=/etc/yum.repos.d/percona-release.repo owner=root group=root mode=0644
+  when: mysql_flavor=='percona'
+  tags:
+    - repos
+    - packages
+
+- name: install percona-release
+  yum: name=percona-release state=present
+  when: mysql_flavor=='percona'
+  tags:
+    - repos
+    - packages
+
+- name: install mysql-community key
+  rpm_key: key=http://repo.mysql.com/RPM-GPG-KEY-mysql state=present
+  when: mysql_flavor=='mysql-community'
+  tags:
+    - repos
+    - packages
+
+- name: template mysql-community config
+  template: src=mysql-community.repo.j2 dest=/etc/yum.repos.d/mysql-community.repo owner=root group=root mode=0644
+  when: mysql_flavor=='mysql-community'
+  tags:
+    - repos
+    - packages
+
+- name: install mysql-community-release
+  yum: name=mysql-community-release state=present
+  when: mysql_flavor=='mysql-community'
+  tags:
+    - repos
+    - packages
+
+- name: install mariadb key
+  rpm_key: key=http://yum.mariadb.org/RPM-GPG-KEY-MariaDB state=present
+  when: mysql_flavor=='mariadb'
+  tags:
+    - repos
+    - packages
+
+- name: place mariadb key
+  get_url: url=http://yum.mariadb.org/RPM-GPG-KEY-MariaDB dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-MariaDB owner=root group=root mode=0644
+  when: mysql_flavor=='mariadb'
+  tags:
+    - repos
+    - packages
+
+- name: template mariadb config
+  template: src=mariadb.repo.j2 dest=/etc/yum.repos.d/mariadb.repo owner=root group=root mode=0644
+  when: mysql_flavor=='mariadb'
+  tags:
+    - repos
+    - packages

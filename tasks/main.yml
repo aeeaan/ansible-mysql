@@ -1,2 +1,3 @@
 ---
-# tasks file for mysql
+- name: configure mysql repos
+  include: repos.yml
