@@ -3,3 +3,6 @@
 # anything else will install standard RHEL RPMs
 mysql_flavor: ''
 mysql_version: 
+
+mysql_install_client: false
+mysql_install_server: false

@@ -1,0 +1,7 @@
+---
+mysql_libs_rpms:
+  - mariadb-libs
+mysql_client_rpms:
+  - mariadb
+mysql_server_rpms:
+  - mariadb-server

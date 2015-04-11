@@ -1,3 +1,19 @@
 ---
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/{{ mysql_flavor }}.yml"
+    - "../vars/{{ ansible_os_family }}{{ ansible_distribution_major_version }}.yml"
+
 - name: configure mysql repos
   include: repos.yml
+
+- name: install mysql libs
+  include: libs.yml
+
+- name: install mysql client
+  include: client.yml
+  when: mysql_install_client == true
+
+- name: install mysql server
+  include: server.yml
+  when: mysql_install_server == true
