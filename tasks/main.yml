@@ -17,3 +17,7 @@
 - name: install mysql server
   include: server.yml
   when: mysql_install_server == true
+
+- name: mysql secure installation
+  include: secure_installation.yml
+  when: mysql_install_server == true
