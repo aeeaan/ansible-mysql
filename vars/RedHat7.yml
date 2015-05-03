@@ -5,3 +5,4 @@ mysql_client_rpms:
   - mariadb
 mysql_server_rpms:
   - mariadb-server
+mysql_service: mariadb

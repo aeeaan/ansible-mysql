@@ -6,3 +6,4 @@ mysql_client_rpms:
   - mysql-community-client
 mysql_server_rpms:
   - mysql-community-server
+mysql_service: mysqld

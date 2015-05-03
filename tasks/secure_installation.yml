@@ -1,0 +1,45 @@
+---
+- name: Start the mysql services
+  service: name={{ mysql_service }} state=started enabled=yes
+  tags:
+    - mysql
+    - configuration
+    - services
+
+- name: remove anonymous users
+  mysql_user: name='' host={{ item }} state=absent
+  with_items:
+          - "{{ ansible_hostname }}"
+          - localhost
+  tags:
+    - mysql
+    - configuration
+
+- name: remove hostname root user
+  mysql_user: name='root' host={{ ansible_hostname }} state=absent
+  when: ansible_hostname != 'localhost'
+  tags:
+    - mysql
+    - configuration
+
+- name: set root password
+  mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+  with_items:
+   - 127.0.0.1
+   - ::1
+   - localhost
+  tags:
+    - mysql
+    - configuration
+
+- name: setup user for root login
+  template: src=client.my.cnf.j2 dest=~/.my.cnf mode=0600
+  tags:
+    - mysql
+    - configuration
+
+- name: remove test database
+  mysql_db: name=test state=absent
+  tags:
+    - mysql
+    - configuration
