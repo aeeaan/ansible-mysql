@@ -1,0 +1,8 @@
+---
+mysql_libs_rpms:
+  - Percona-Server-shared-56 
+mysql_client_rpms:
+  - Percona-Server-client-56
+mysql_server_rpms:
+  - Percona-Server-server-56
+mysql_service: mysqld
