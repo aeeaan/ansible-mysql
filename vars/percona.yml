@@ -6,3 +6,5 @@ mysql_client_rpms:
 mysql_server_rpms:
   - Percona-Server-server-56
 mysql_service: mysqld
+mysql_pid_file: /var/run/mysqld/mysqld.pid
+mysql_log_error: /var/log/mysqld.log

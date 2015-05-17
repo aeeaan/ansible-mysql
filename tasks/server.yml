@@ -5,3 +5,27 @@
   tags:
     - mysql
     - packages
+
+- name: config main my.cnf file
+  template: src=my.cnf.j2 dest=/etc/my.cnf owner=root group=root mode=0644
+  notify: 
+   - restart mysql
+  tags:
+    - mysql
+    - configuration
+
+- name: Create the directory /config_dir/mysql/conf.d
+  file: path="/etc/my.cnf.d" state=directory owner=root group=root mode=0755
+  notify:
+   - restart mysql
+  tags:
+    - mysql
+    - configuration
+
+- name: config my.cnf.d
+  template: src="{{ item }}.j2" dest="/etc/my.cnf.d/{{ item }}" owner=root group=root mode=0644
+  with_items:
+    - server.cnf
+  tags:
+    - mysql
+    - configuration
