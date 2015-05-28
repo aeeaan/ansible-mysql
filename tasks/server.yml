@@ -31,3 +31,12 @@
   tags:
     - mysql
     - configuration
+
+- name: configure firewalld for mysqld
+  firewalld: zone=public port="{{ mysql_port }}/tcp" permanent=true state=enabled
+  notify: reload firewall
+  when: mysql_open_port and ansible_distribution_major_version|int > 6
+  tags:
+    - mysql
+    - firewall
+    - configuration

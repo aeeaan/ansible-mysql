@@ -20,6 +20,7 @@ Role Variables
 | mysql_root_password			| password			|						|
 | mysql_host				| localhost			|						|
 | mysql_port				| 3306				|						|
+| mysql_open_port			| false				|						|
 | mysql_bind_address			| "0.0.0.0"			|						|
 | mysql_root_password			| 'pass'			|						|
 | mysql_key_buffer_size			| '16M'				|						|
