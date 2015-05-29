@@ -1,6 +1,5 @@
 ---
 mysql_libs_rpms:
-  - mysql-community-common
   - mysql-community-libs
 mysql_client_rpms:
   - mysql-community-client
