@@ -22,7 +22,6 @@ Role Variables
 | mysql_port				| 3306				|						|
 | mysql_open_port			| false				|						|
 | mysql_bind_address			| "0.0.0.0"			|						|
-| mysql_root_password			| 'pass'			|						|
 | mysql_key_buffer_size			| '16M'				|						|
 | mysql_max_allowed_packet		| '4M'				|						|
 | mysql_thread_stack			| '256K'			|						|
