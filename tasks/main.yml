@@ -26,6 +26,7 @@
   mysql_db: name={{ item.name }} encoding={{ item.encoding|default(mysql_character_set_server) }} collation={{ item.collation|default(mysql_collation_server) }} state=present
   with_items: mysql_databases
   when: mysql_databases|length > 0 and item.name is defined
+  register: mysql_create_databases
   tags:
     - mysql
     - configuration
