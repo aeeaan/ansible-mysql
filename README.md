@@ -43,7 +43,7 @@ Role Variables
 Dependencies
 ------------
 
-TODO
+- correcthorse.common
 
 Example Playbook
 ----------------

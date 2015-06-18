@@ -12,4 +12,5 @@ galaxy_info:
   categories:
   - database
   - database:sql
-dependencies: []
+dependencies:
+  - { role: correcthorse.common }
