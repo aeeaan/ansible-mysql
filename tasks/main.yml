@@ -22,6 +22,13 @@
   include: secure_installation.yml
   when: mysql_install_server == true
 
+- name: ensure root credentials are present
+  template: src=client.my.cnf.j2 dest=~/.my.cnf mode=0600
+  when: mysql_install_server == false
+  tags:
+    - mysql
+    - configuration
+
 - name: create mysql databases
   mysql_db: name={{ item.name }} encoding={{ item.encoding|default(mysql_character_set_server) }} collation={{ item.collation|default(mysql_collation_server) }} state=present
   with_items: mysql_databases
