@@ -11,6 +11,7 @@ Role Variables
 | mysql_version				|				| 		    	       			|
 | mysql_install_client			| false				|						|
 | mysql_install_server			| false				|						|
+| mysql_install_devel			| false				|						|
 | mysql_root_user			| root				| built-in 'root' will be removed if not root	|
 | mysql_root_password			| password			|						|
 | mysql_host				| localhost			|						|

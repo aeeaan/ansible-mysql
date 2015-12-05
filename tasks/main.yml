@@ -18,6 +18,10 @@
   include: server.yml
   when: mysql_install_server == true
 
+- name: install mysql development
+  include: devel.yml
+  when: mysql_install_devel == true
+
 - name: mysql secure installation
   include: secure_installation.yml
   when: mysql_install_server == true
