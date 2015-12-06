@@ -29,7 +29,7 @@ mysql_query_cache_limit: '1M'
 mysql_query_cache_size: '16M'
 
 mysql_character_set_server: 'utf8'
-mysql_collation_server: 'utf8_general_ci'
+mysql_collation_server: 'utf8_unicode_ci'
 mysql_mysqldump_max_allowed_packet: '128M'
 mysql_isamchk_key_buffer: '16M'
 
