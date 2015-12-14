@@ -1,4 +1,26 @@
 ---
+- name: ensure yum replace plugin installed
+  yum: name=yum-plugin-replace
+  when: mysql_default_lib is defined and mysql_compat_lib is defined
+  tags:
+    - mysql
+    - packages
+
+- name: check if original is installed
+  command: rpm -q {{ mysql_default_lib }}
+  register: mysql_rpm_check
+  when: mysql_default_lib is defined and mysql_compat_lib is defined
+  tags:
+    - mysql
+    - packages
+
+- name: yum replace default with compat if installed
+  command: "yum replace {{ mysql_default_lib }} --replace-with {{ mysql_compat_lib }}"
+  when: mysql_default_lib is defined and mysql_compat_lib is defined and rpm_check.stdout.find('is not installed') != -1
+  tags:
+    - mysql
+    - packages
+
 - name: install mysql libs rpms
   yum: name={{ item }} state=present
   with_items: mysql_libs_rpms
