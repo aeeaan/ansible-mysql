@@ -1,10 +1,9 @@
 ---
-#default_lib and compat_lib can be used if packages don't cleanly upgrade existing lib packages
-#this will install yum-plugin-replace and manually replace default package with compat package
-#clean install assumed ie conflicting client/server packages are not installed, just libs
-mysql_default_lib: mysql-libs
-mysql_compat_lib: mysqlclient16
+#warning: mysql_remove_lib will nodeps uninstall the rpm as it is assumed the next step
+#is to reinstall compatible libs
+mysql_remove_lib: mysql-libs
 mysql_libs_rpms:
+  - mysqlclient16
   - mysql56u-libs
 mysql_client_rpms:
   - mysql56u

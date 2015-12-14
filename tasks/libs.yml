@@ -1,22 +1,17 @@
 ---
-- name: ensure yum replace plugin installed
-  yum: name=yum-plugin-replace
-  when: mysql_default_lib is defined and mysql_compat_lib is defined
-  tags:
-    - mysql
-    - packages
-
-- name: check if original is installed
-  command: rpm -q {{ mysql_default_lib }}
+- name: check if lib that needs to be manually removed is installed
+  command: rpm -q {{ mysql_remove_lib }}
   register: mysql_rpm_check
-  when: mysql_default_lib is defined and mysql_compat_lib is defined
+  when: mysql_remove_lib is defined and mysql_remove_lib != ''
+  changed_when: false
+  failed_when: mysql_rpm_check.rc > 1
   tags:
     - mysql
     - packages
 
-- name: yum replace default with compat if installed
-  command: "yum replace {{ mysql_default_lib }} --replace-with {{ mysql_compat_lib }}"
-  when: mysql_default_lib is defined and mysql_compat_lib is defined and mysql_rpm_check.stdout.find('is not installed') != -1
+- name: manually remove package with nodeps so we can install new libs
+  command: "rpm -e --nodeps {{ mysql_remove_lib }}"
+  when: mysql_rpm_check.rc ==0
   tags:
     - mysql
     - packages
