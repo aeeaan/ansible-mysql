@@ -1,13 +1,13 @@
 correcthorse.mysql
 =========
 
-An ansible role for installing and configuring mysql, mariadb or percona.
+An ansible role for installing and configuring mysql, mariadb or percona. Please note that some mysql flavors are only for certain versions of RHEL/CentOS. There will be better documentation on this in the future.
 
 Role Variables
 --------------
 | Variable				| Default			| Notes						|
 | :---					| :---				| :---						|
-| mysql_flavor				| ''				| '', 'percona', 'mysql-community'		|
+| mysql_flavor				| ''				| '', 'percona', 'mysql-community', 'mysql-ius' |
 | mysql_version				|				| 		    	       			|
 | mysql_install_client			| false				|						|
 | mysql_install_server			| false				|						|
