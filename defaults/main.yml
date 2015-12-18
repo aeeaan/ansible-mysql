@@ -8,6 +8,8 @@ mysql_install_client: false
 mysql_install_server: false
 mysql_install_devel: false
 
+mysql_create_once: false
+
 mysql_root_user: root
 mysql_root_password: password
 mysql_host: localhost

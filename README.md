@@ -12,6 +12,7 @@ Role Variables
 | mysql_install_client			| false				|						|
 | mysql_install_server			| false				|						|
 | mysql_install_devel			| false				|						|
+| mysql_create_once			| false				| turn on run_once for user/permission creation |
 | mysql_root_user			| root				| built-in 'root' will be removed if not root	|
 | mysql_root_password			| password			|						|
 | mysql_host				| localhost			|						|
@@ -40,6 +41,12 @@ Role Variables
 | mysql_innodb_log_file_size		| '48M'				|						|
 | mysql_innodb_file_per_table		| 'innodb_file_per_table'	| set to empty string to turn this off		|
 
+
+Notes
+------------
+
+If you are not managing a mysql server directly and are creating dbs or database users from a cluster of app nodes, set
+mysql_create_once to true so those tasks only run on a single node
 
 Dependencies
 ------------
