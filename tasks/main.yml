@@ -36,8 +36,17 @@
 - name: create mysql databases
   mysql_db: name={{ item.name }} encoding={{ item.encoding|default(mysql_character_set_server) }} collation={{ item.collation|default(mysql_collation_server) }} login_host={{ mysql_host|default(omit) }} login_port={{ mysql_port|default(omit) }} state=present
   with_items: mysql_databases
-  when: mysql_databases|length > 0 and item.name is defined and mysql_root_user != ''
-  run_once: "{{ mysql_create_once }}"
+  when: mysql_databases|length > 0 and item.name is defined and mysql_root_user != '' and mysql_create_once == false
+  register: mysql_create_databases
+  tags:
+    - mysql
+    - configuration
+
+- name: create mysql databases once
+  mysql_db: name={{ item.name }} encoding={{ item.encoding|default(mysql_character_set_server) }} collation={{ item.collation|default(mysql_collation_server) }} login_host={{ mysql_host|default(omit) }} login_port={{ mysql_port|default(omit) }} state=present
+  with_items: mysql_databases
+  when: mysql_databases|length > 0 and item.name is defined and mysql_root_user != '' and mysql_create_once == true
+  run_once: true
   register: mysql_create_databases
   tags:
     - mysql
@@ -46,8 +55,16 @@
 - name: create mysql users
   mysql_user: name={{ item.name }} host={{ item.host|default('localhost') }} password={{ item.password }} priv={{ item.priv|default('*.*:USAGE') }} login_host={{ mysql_host|default(omit) }} login_port={{ mysql_port|default(omit) }} state=present
   with_items: mysql_users
-  when: mysql_users|length > 0 and item.name is defined and item.password is defined and mysql_root_user != ''
-  run_once: "{{ mysql_create_once }}"
+  when: mysql_users|length > 0 and item.name is defined and item.password is defined and mysql_root_user != '' and mysql_create_once == false
+  tags:
+    - mysql
+    - configuration
+
+- name: create mysql users once
+  mysql_user: name={{ item.name }} host={{ item.host|default('localhost') }} password={{ item.password }} priv={{ item.priv|default('*.*:USAGE') }} login_host={{ mysql_host|default(omit) }} login_port={{ mysql_port|default(omit) }} state=present
+  with_items: mysql_users
+  when: mysql_users|length > 0 and item.name is defined and item.password is defined and mysql_root_user != '' and mysql_create_once == true
+  run_once: true
   tags:
     - mysql
     - configuration
