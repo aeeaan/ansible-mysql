@@ -11,7 +11,7 @@
 
 - name: manually remove package with nodeps so we can install new libs
   command: "rpm -e --nodeps {{ mysql_remove_lib }}"
-  when: mysql_rpm_check.rc ==0
+  when: mysql_rpm_check is defined and mysql_rpm_check.rc == 0
   tags:
     - mysql
     - packages
