@@ -1,7 +1,7 @@
 ---
 - name: install mysql server rpms
   yum: name={{ item }} state=present
-  with_items: mysql_server_rpms
+  with_items: "{{ mysql_server_rpms }}"
   tags:
     - mysql
     - packages
