@@ -24,15 +24,15 @@ gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 [mysql56-community]
 name=MySQL 5.6 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/{{ ansible_distribution_major_version }}/$basearch/
-enabled=1
+enabled=0
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 
 # Note: MySQL 5.7 is currently in development. For use at your own risk.
 # Please read with sub pages: https://dev.mysql.com/doc/relnotes/mysql/5.7/en/
-[mysql57-community-dmr]
+[mysql57-community]
 name=MySQL 5.7 Community Server Development Milestone Release
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/{{ ansible_distribution_major_version }}/$basearch/
-enabled=0
+enabled=1
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
