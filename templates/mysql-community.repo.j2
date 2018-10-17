@@ -16,7 +16,11 @@ gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 [mysql55-community]
 name=MySQL 5.5 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.5-community/el/{{ ansible_distribution_major_version }}/$basearch/
+{% if mysql_version is defined and mysql_version|int >= 5.5 and mysql_version|int < 5.6 %}
+enabled=1
+{% else %}
 enabled=0
+{% endif %}
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 
@@ -24,7 +28,11 @@ gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 [mysql56-community]
 name=MySQL 5.6 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/{{ ansible_distribution_major_version }}/$basearch/
+{% if mysql_version is defined and mysql_version|int >= 5.6 and mysql_version|int < 5.7 %}
+enabled=1
+{% else %}
 enabled=0
+{% endif %}
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 
@@ -33,6 +41,10 @@ gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 [mysql57-community]
 name=MySQL 5.7 Community Server Development Milestone Release
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/{{ ansible_distribution_major_version }}/$basearch/
+{% if mysql_version is not defined or mysql_version is defined and mysql_version|int >= 5.7 or mysql_version is defined and mysql_version|int < 5.5 %}
 enabled=1
+{% else %}
+enabled=0
+{% endif %}
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
