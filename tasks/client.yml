@@ -1,7 +1,6 @@
 ---
 - name: install mysql client rpms
-  yum: name={{ item }} state=present
-  with_items: "{{ mysql_client_rpms }}"
+  yum: name='{{ mysql_client_rpms }}' state=present 
   tags:
     - mysql
     - packages

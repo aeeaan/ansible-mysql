@@ -1,7 +1,6 @@
 ---
 - name: install mysql devel rpms
-  yum: name={{ item }} state=present
-  with_items: "{{ mysql_devel_rpms }}"
+  yum: name='{{ mysql_devel_rpms }}' state=present
   tags:
     - mysql
     - packages
