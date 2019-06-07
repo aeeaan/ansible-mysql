@@ -36,12 +36,23 @@ enabled=0
 gpgcheck=1
 gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
 
-# Note: MySQL 5.7 is currently in development. For use at your own risk.
-# Please read with sub pages: https://dev.mysql.com/doc/relnotes/mysql/5.7/en/
+# Enable to use MySQL 5.7
 [mysql57-community]
-name=MySQL 5.7 Community Server Development Milestone Release
+name=MySQL 5.7 Community Server
 baseurl=http://repo.mysql.com/yum/mysql-5.7-community/el/{{ ansible_distribution_major_version }}/$basearch/
-{% if mysql_version is not defined or mysql_version is defined and mysql_version|float >= 5.7 or mysql_version is defined and mysql_version|float < 5.5 %}
+{% if mysql_version is defined and mysql_version|float >= 5.7 and mysql_version|float < 8.0 %}
+enabled=1
+{% else %}
+enabled=0
+{% endif %}
+gpgcheck=1
+gpgkey=file:/etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+# Enable to use MySQL 8.0
+[mysql80-community]
+name=MySQL 5.7 Community Server
+baseurl=http://repo.mysql.com/yum/mysql-8.0-community/el/{{ ansible_distribution_major_version }}/$basearch/
+{% if mysql_version is not defined or mysql_version is defined and mysql_version|float >= 8.0 or mysql_version is defined and mysql_version|float < 5.5 %}
 enabled=1
 {% else %}
 enabled=0
