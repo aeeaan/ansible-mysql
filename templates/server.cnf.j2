@@ -17,7 +17,6 @@ myisam-recover-options={{ mysql_myisam_recover }}
 {% endif %}
 max_connections={{ mysql_max_connections }}
 table_open_cache={{ mysql_table_open_cache }}
-thread_concurrency={{ mysql_thread_concurrency }}
 
 query_cache_type={{ mysql_query_cache_type }}
 query_cache_limit={{ mysql_query_cache_limit }}
@@ -41,10 +40,15 @@ collation_server={{ mysql_collation_server }}
 # this is only for embedded server
 [embedded]
 
-# This group is only read by MariaDB-5.5 servers.
-# If you use the same .cnf file for MariaDB of different versions,
-# use this group for options that older servers don't understand
 [mysqld-5.5]
+
+[mysqld-5.6]
+
+[mysqld-5.7]
+
+[mysqld-8.0]
+character_set_server=utf8mb4
+collation_server=utf8mb4_0900_ai_ci
 
 # These two groups are only read by MariaDB servers, not by MySQL.
 # If you use the same .cnf file for MySQL and MariaDB,
