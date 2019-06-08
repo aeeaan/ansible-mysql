@@ -1,4 +1,11 @@
 ---
+- name: install mysql-connector-python
+  yum: name=mysql-connector-python state=present
+  when: mysql_flavor == 'mysql_community'
+  tags:
+    - mysql
+    - packages
+
 - name: check if lib that needs to be manually removed is installed
   command: rpm -q {{ mysql_remove_lib }}
   register: mysql_rpm_check
