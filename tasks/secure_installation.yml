@@ -7,7 +7,7 @@
     - services
 
 - name: get root password
-  shell: "grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log | awk -F ' ' '{print $(NF)}'"
+  shell: "grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log | awk -F ' ' '{print $(NF)}' | tail -1"
   when: mysql_flavor == 'mysql-community' and mysql_version|float > 5.6
   register: mysql_auto_password
 
