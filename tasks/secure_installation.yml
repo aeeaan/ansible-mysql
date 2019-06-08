@@ -25,7 +25,7 @@
 
 - name: set up root user
   mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} login_password="{{ mysql_root_password }}" priv=*.*:ALL,GRANT state=present
-  when: mysql_password_set is defined
+  when: mysql_password_set.changed
   with_items:
    - 127.0.0.1
    - ::1
@@ -36,7 +36,7 @@
 
 - name: set up root user
   mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT state=present
-  when: mysql_password_set is not defined
+  when: !mysql_password_set.changed
   with_items:
    - 127.0.0.1
    - ::1
