@@ -11,8 +11,15 @@
   when: mysql_flavor == 'mysql-community' and mysql_version|float > 5.6
   register: mysql_auto_password
 
+# get auto generated pass
+# .my.cnf created later, but this should prevent it from running every time
+- name: root user password
+  command: mysql --user root --password={{ mysql_auto_password.stdout }} --connect-expired-password --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql.root.password }}';"
+  when: mysql_flavor == 'mysql-community' and mysql_version|float > 5.6
+  creates: ~/.my.cnf
+
 - name: set up root user
-  mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} login_user=root login_password="{{ mysql_auto_password }}|default(omit)" priv=*.*:ALL,GRANT state=present
+  mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT state=present
   with_items:
    - 127.0.0.1
    - ::1
