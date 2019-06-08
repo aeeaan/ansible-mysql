@@ -16,7 +16,8 @@
 - name: root user password
   command: mysql --user root --password={{ mysql_auto_password.stdout }} --connect-expired-password --execute="ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql.root.password }}';"
   when: mysql_flavor == 'mysql-community' and mysql_version|float > 5.6
-  creates: ~/.my.cnf
+  args:
+    creates: ~/.my.cnf
 
 - name: set up root user
   mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT state=present
