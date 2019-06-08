@@ -5,6 +5,9 @@ bind-address={{ mysql_bind_address }}
 datadir=/var/lib/mysql
 socket=/var/lib/mysql/mysql.sock
 
+#ansible only supports this method for now
+default-authentication-plugin=mysql_native_password
+
 # Disabling symbolic-links is recommended to prevent assorted security risks
 symbolic-links=0
 
