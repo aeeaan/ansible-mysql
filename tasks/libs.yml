@@ -1,7 +1,7 @@
 ---
 - name: install mysql-connector-python
   yum: name=mysql-connector-python state=present
-  when: mysql_flavor == 'mysql_community'
+  when: mysql_flavor == 'mysql-community'
   tags:
     - mysql
     - packages
