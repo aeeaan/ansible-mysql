@@ -5,6 +5,8 @@
 
 # this is only for the mysqld standalone daemon
 [mysqld]
+log-error={{ mysql_log_error }}
+pid-file={{ mysql_pid_file }}
 
 key_buffer_size={{ mysql_key_buffer_size }}
 max_allowed_packet={{ mysql_max_allowed_packet }}
