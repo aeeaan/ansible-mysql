@@ -1,6 +1,7 @@
 ---
 - name: install mysql server rpms
   yum: name='{{ mysql_server_rpms }}' state=present
+  register: mysqld_installed
   tags:
     - mysql
     - packages
