@@ -6,8 +6,13 @@
     - configuration
     - services
 
+- name: get root password
+  shell: "grep 'A temporary password is generated for root@localhost' /var/log/mysqld.log | awk -F ' ' '{print $(NF)}'"
+  when: mysql_flavor == 'mysql-community' and mysql_version|float > 5.6
+  register: mysql_auto_password
+
 - name: set up root user
-  mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT state=present
+  mysql_user: name={{ mysql_root_user}} host={{ item }} password={{ mysql_root_password }} login_user=root login_password="{{ mysql_auto_password }}|default(omit)" priv=*.*:ALL,GRANT state=present
   with_items:
    - 127.0.0.1
    - ::1
