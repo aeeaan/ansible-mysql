@@ -31,3 +31,10 @@
 
 - name: install mysqldb
   yum: name=MySQL-python state=present
+  when: ansible_distribution_major_version|int < 8
+
+- name: install PyMySQL
+  yum:
+    name: python3-PyMySQL
+    state: present
+  when: ansible_distribution_major_version|int > 7
