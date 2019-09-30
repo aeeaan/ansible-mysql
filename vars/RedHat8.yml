@@ -1,0 +1,12 @@
+---
+mysql_libs_rpms:
+  - mariadb-connector-c
+mysql_client_rpms:
+  - mariadb
+mysql_server_rpms:
+  - mariadb-server
+mysql_devel_rpms:
+  - mariadb-devel
+mysql_service: mariadb
+mysql_pid_file: /var/run/mariadb/mariadb.pid
+mysql_log_error: /var/log/mariadb/mariadb.log
